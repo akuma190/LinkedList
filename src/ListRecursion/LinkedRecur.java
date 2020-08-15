@@ -1,6 +1,7 @@
 package ListRecursion;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class LinkedRecur {
 
@@ -692,7 +693,8 @@ public class LinkedRecur {
 
 	// checking if the linkedlist is a palindrome
 	// 12->99->37->37->99->12
-	//Enter the value till one half of the linkedlist and then match with the second half..
+	// Enter the value till one half of the linkedlist and then match with the
+	// second half..
 	public boolean ifPalindrome(Node node) {
 		if (node == null || node.next == null) {
 			return true;
@@ -711,7 +713,7 @@ public class LinkedRecur {
 			s.push(slow);
 		}
 
-		if (fast.next == null) {//if null then odd nodes otherwise even nodes.
+		if (fast.next == null) {// if null then odd nodes otherwise even nodes.
 			s.pop();
 		}
 
@@ -726,5 +728,491 @@ public class LinkedRecur {
 		}
 
 		return true;
+	}
+	// delete the nodes which have greater values on the right.
+	// taking two loops will not be an efficient solution.
+	// we'll revrese the linked list and then carry on
+
+	public Node deleteGreaterValuesOnRight(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node reverse = this.reverse(node);
+		Node tmp = reverse;
+		int max = tmp.data;
+
+		while (tmp.next != null) {
+			if (tmp.next.data > max) {// if its greater then its okay
+				max = tmp.next.data;
+				tmp = tmp.next;
+			} else {
+				tmp.next = tmp.next.next;// otherwise we will delete the node
+			}
+		}
+
+		node = this.reverse(reverse);
+
+		return node;
+	}
+
+	// Checking if two lists are identical or not
+	public boolean ifIdenticalLists(Node node1, Node node2) {
+		while (node1 != null && node2 != null) {
+			if (node1.data != node2.data) {
+				return false;
+			}
+
+			node1 = node1.next;
+			node2 = node2.next;
+		}
+
+		return (node1 == null && node2 == null);
+	}
+
+	// pairwise swapping the elements of the linked list.
+	// 12->99->8->39->5
+	// 99->12->39->8->5
+	public Node pairwiseSwapElements(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node head = node;
+
+		while (node != null && node.next != null) {
+			int t = node.data;
+			node.data = node.next.data;
+			node.next.data = t;
+
+			node = node.next.next;
+		}
+
+		return head;
+	}
+
+	// deleting alternate nodes from the linkdlist
+	// 12->99->8->39->5
+	// 12->8->5
+	public Node deleteAlternateNode(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node head = node;
+
+		while (node != null && node.next != null) {
+			node.next = node.next.next;
+			node = node.next;
+		}
+
+		return head;
+	}
+
+	// moving the last element of the list to the front
+	public Node moveLastNodeToFront(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node head = node;
+
+		while (node.next.next != null) {// rather than using previous used this concept.
+			node = node.next;
+		}
+
+		node.next.next = head;
+		head = node.next;
+
+		node.next = null;
+		return head;
+	}
+
+	// swapping the nodes of the linkedlist without swapping the data.
+	public Node swapNodes(Node node, int a, int b) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node t1, t2, head, prev1, prev2;
+		prev1 = prev2 = t1 = t2 = null;
+
+		head = node;
+
+		while (node != null) {
+			if (node.data == a) {
+				t1 = node;
+				break;
+			}
+			prev1 = node;
+			node = node.next;
+		}
+
+		node = head;
+
+		while (node != null) {
+			if (node.data == b) {
+				t2 = node;
+				break;
+			}
+			prev2 = node;
+			node = node.next;
+		}
+
+		if (t1 == null || t2 == null) {
+			return head;
+		}
+
+		if (prev1 != null) {
+			prev1.next = t2;
+		} else {
+			head = t2;
+		}
+
+		if (prev2 != null) {
+			prev2.next = t1;
+		} else {
+			head = t1;
+		}
+
+		Node tmp = t1.next;
+		t1.next = t2.next;
+		t2.next = tmp;
+
+		return head;
+	}
+
+	// finding out the intersection point of the two unsorted list
+	// if the node lies in teh first half then issue.
+	public int getIntersectionOfLists(Node node1, Node node2) {
+		if (node1 == null || node2 == null) {
+			return -1;
+		}
+
+		Node head1 = node1, head2 = node2;
+
+		int count1 = 0, count2 = 0;
+		while (node1 != null) {
+			count1++;
+			node1 = node1.next;
+		}
+
+		while (node2 != null) {
+			count2++;
+			node2 = node2.next;
+		}
+
+		int v = count1 - count2;
+		while (v > 0) {
+			head1 = head1.next;
+			v--;
+		}
+
+		while (v < 0) {
+			head2 = head2.next;
+			v++;
+		}
+
+		while (head1 != null && head2 != null) {
+			if (head1.data == head2.data) {
+				return head1.data;
+			}
+
+			head1 = head1.next;
+			head2 = head2.next;
+		}
+
+		return -1;
+	}
+
+	// reversing a linked list iteratively
+	public Node reverseIteratively(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node prev, next;
+		prev = next = null;
+
+		while (node != null) {
+			next = node.next;
+			node.next = prev;
+			prev = node;
+			node = next;
+		}
+
+		return prev;
+	}
+
+	// reversing the linkedlist in group of K
+	// 12->99->8->39->5
+	// 8->99->12->5->39
+	public Node reverseInGroup(Node head, int k) {
+		Node prev, next;
+		prev = next = null;
+
+		Node node = head;
+
+		int i = 0;
+
+		while (node != null && i < k) {
+			next = node.next;
+			node.next = prev;
+			prev = node;
+			node = next;
+			i++;
+		}
+
+		if (next != null) {
+			head.next = reverseInGroup(next, k);
+		}
+
+		return prev;
+	}
+
+	// reverse alternatively in the group of K.
+	// 12->99->8->->39->5->70->25
+	// 99->12->8->39->70->5->25
+	// Add two loop within the loop.In one loop reverse two times in other increase
+	// two times.
+	public Node reverseAlternativelyInGroup(Node head, int k) {
+		if (k <= 1 || head == null || head.next == null) {
+			return head;
+		}
+		Node prev, next;
+		prev = next = null;
+
+		Node node = head;
+
+		int i = 0;
+
+		while (node != null && i < k) {
+			next = node.next;
+			node.next = prev;
+			prev = node;
+			node = next;
+			i++;
+		}
+
+		i = 0;
+		if (next != null) {
+			head.next = next;
+			node = next;
+			while (node != null && i < k - 1) {
+				node = node.next;
+				i++;
+			}
+			if (node != null) {
+				node.next = reverseAlternativelyInGroup(node.next, k);
+			}
+		}
+
+		return prev;
+	}
+
+	// separating the even and odd nodes from the linked list.
+	// 12->99->8->->39->5->70->25
+	// 12->8->70->99->39->5->25
+	// tis can be solved efficiently using four pointers.
+	public Node seperateOddEven(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node evenStartingNode, evenEndNode, oddStartingNode, oddEndNode;
+
+		evenStartingNode = evenEndNode = oddStartingNode = oddEndNode = null;
+
+		while (node != null) {
+			if (node.data % 2 == 0) {
+				if (evenStartingNode == null) {
+					evenStartingNode = node;
+					evenEndNode = evenStartingNode;
+				} else {
+					evenEndNode.next = node;
+					evenEndNode = evenEndNode.next;
+				}
+			} else {
+				if (oddStartingNode == null) {
+					oddStartingNode = node;
+					oddEndNode = oddStartingNode;
+				} else {
+					oddEndNode.next = node;
+					oddEndNode = oddEndNode.next;
+				}
+			}
+
+			node = node.next;
+		}
+
+		evenEndNode.next = oddStartingNode;
+		oddEndNode.next = null;
+		return evenStartingNode;
+	}
+
+	// splitting a single linkedlist alternatively.
+	Node firstHead, secondHead;
+
+	public void alternateSplit(Node node) {
+		if (node == null || node.next == null) {
+			return;
+		}
+
+		Node firstTemp;
+		Node secondTemp;
+
+		firstHead = firstTemp = node;
+		secondHead = secondTemp = node.next;
+		node = node.next.next;
+
+		while (node != null && node.next != null) {
+			firstTemp.next = node;
+			secondTemp.next = node.next;
+
+			firstTemp = firstTemp.next;
+			secondTemp = secondTemp.next;
+
+			node = node.next.next;
+		}
+
+		if (node != null) {
+			firstTemp.next = node;
+			firstTemp = firstTemp.next;
+		}
+
+		firstTemp.next = null;
+		secondTemp.next = null;
+
+		return;
+	}
+
+	// swapping the node links pairwise.
+	public Node pairwiseSwapNodeLinks(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node head = node.next;
+
+		Node prev = node;
+		node = node.next;
+		Node next;
+
+		while (node != null) {
+			next = node.next;
+			node.next = prev;
+
+			if (next == null || next.next == null) {
+				prev.next = next;
+				break;
+			}
+
+			prev.next = next.next;
+
+			prev = next;
+			node = prev.next;
+		}
+
+		return head;
+	}
+
+	// merging two lists alternatively.
+	// 12->99->8->39
+	// 5->70
+	Node first, second;
+
+	public void mergeTwoListAlternatively(Node node1, Node node2) {
+
+		Node node1next, node2next;
+		first = node1;
+		second = node2;
+
+		while (node1 != null && node2 != null) {
+			node1next = node1.next;
+			node1.next = node2;
+			node1 = node1next;
+
+			node2next = node2.next;
+			node2.next = node1next;
+			node2 = node2next;
+		}
+
+		second = node2;
+	}
+
+	// sort list of items with only 0,1 and 2
+	// 2->1->0->1->2->1
+	// 0->1->1->1->2->2
+	public Node sortListOfZeroOneTwos(Node node) {
+		if (node == null || node.next == null) {
+			return node;
+		}
+
+		Node head = node;
+
+		int count_0, count_1, count_2;
+
+		count_0 = count_1 = count_2 = 0;
+
+		while (node != null) {
+			if (node.data == 0) {
+				count_0++;
+			} else if (node.data == 1) {
+				count_1++;
+			} else {
+				count_2++;
+			}
+
+			node = node.next;
+		}
+
+		node = head;
+
+		while (count_0 > 0) {
+			node.data = 0;
+			node = node.next;
+			count_0--;
+		}
+
+		while (count_1 > 0) {
+			node.data = 1;
+			node = node.next;
+			count_1--;
+		}
+
+		while (count_2 > 0) {
+			node.data = 2;
+			node = node.next;
+			count_2--;
+		}
+
+		return head;
+	}
+	//add 1 to the linked list
+	//1->9->9->9->9
+	//2->0->0->->0
+	//9->9->9->9->->9
+	//1->0->0-0->0->0
+	public int addNumber(Node node,int i) {
+		if(node==null) {
+			return i;
+		}else {
+			int j=node.data+addNumber(node.next,i);
+			node.data=j%10;
+			return j/10;
+		}
+	}
+	
+	public Node addOne(Node node,int i) {
+		int c=addNumber(node,i);
+		
+		System.out.println(c);
+		if(c==1) {
+			Node newNode=createNewNode(c);
+			System.out.println(newNode.data);
+			newNode.next=node;
+			return newNode;
+		}
+		return node;
 	}
 }
