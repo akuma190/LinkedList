@@ -170,6 +170,9 @@ public class LinkedRecur {
 	}
 
 	// rotating linked list by k nodes
+	//12->99->37->8->18
+	//18->12->99->37->8
+	//8->18->12->99->37
 	public Node rotateLinkedList(Node head, int k) {
 		if (head == null) {
 			return null;
@@ -195,7 +198,7 @@ public class LinkedRecur {
 		return head;
 	}
 
-	// one more method fot linkedlist rotations
+	// one more method for linkedlist rotations
 	public Node rotateClockwise(int k, Node node) {
 		if (node == null || k < 0) {
 			return node;
@@ -260,7 +263,9 @@ public class LinkedRecur {
 			return node;
 		}
 
-		Node temp = reverse(node.next);// for node 99 the return will be
+		Node temp = reverse(node.next);// for node 99 the return will be 37.after 37 its null.
+		//node is 99 and node.next.next is 37.next
+		//second iteration 12.next is 99.next=12
 		node.next.next = node;
 		node.next = null;
 
@@ -371,7 +376,7 @@ public class LinkedRecur {
 		return finalList.next;
 	}
 
-	// **getting the lowest element from the intersection of two linked lists.
+	// **getting the lowest common element from the intersection of two linked lists.
 	// first sort both the lists then run the merging algorithm to get the common
 	// element.
 	public Node getLowestCommomElementOfTwoLinkedLists(Node a, Node b) {
@@ -392,7 +397,7 @@ public class LinkedRecur {
 		return null;
 	}
 
-	// to remove the duplicate elements from the linkedlist
+	// to remove the duplicate elements from the sorted linked linkedlist
 	public Node removeDuplicates(Node head) {
 		if (head == null) {
 			return null;
@@ -427,9 +432,10 @@ public class LinkedRecur {
 
 		return node;
 	}
+	//to remove the dulicates from unsorted linked list we can first sort the list
 
 	// deleting N nodes after M nodes from a linked list.
-	// first traverse m nodes then delete the n nodes.
+	// first traverse n nodes then delete the m nodes.
 	public Node deleteAfterTrav(int n, int m, Node head) {
 		if (head == null) {
 			return null;
@@ -507,7 +513,11 @@ public class LinkedRecur {
 		return head;
 	}
 
-	// getting the last element of the list through two pointers.
+	// getting the kth last element of the list through two pointers.
+	//8->18->17->28->6->null
+	//2nd from the last means 28.
+	//we can get size then size -k but this will need two traversals.
+	//
 	public int returnKthLastNode(Node node, int k) {
 		if (node == null) {
 			System.out.println("Linked list is empty");
@@ -516,6 +526,7 @@ public class LinkedRecur {
 
 		Node ptr1, ptr2;
 		ptr1 = ptr2 = node;
+		//take two pointers and then traverse one of the pointer till k-1
 		for (int i = 1; i < k; i++) {
 			ptr2 = ptr2.next;
 			if (ptr2 == null) {
@@ -523,7 +534,8 @@ public class LinkedRecur {
 				return -1;
 			}
 		}
-
+        
+		//traverse both and when one of the pointers becomes null then both are done.
 		while (ptr2.next != null) {
 			ptr1 = ptr1.next;
 			ptr2 = ptr2.next;
@@ -640,6 +652,7 @@ public class LinkedRecur {
 	// removing the middle node.If odd then remove the middle node.
 	// if even then there will be two middle.remove the second middle.
 	// we'll take two pointers and in every step save the previous node to slow.
+	//this two pointer strategy can be used to find the middle.
 	public Node deleteMiddleNode(Node node) {
 		if (node == null || node.next == null) {
 			return null;
@@ -730,20 +743,21 @@ public class LinkedRecur {
 		return true;
 	}
 	// delete the nodes which have greater values on the right.
-	// taking two loops will not be an efficient solution.
+	// taking two loops will not be an efficient solution O(n2).
 	// we'll revrese the linked list and then carry on
-
+    //12->99->8->39->5
+	//99->39->5
 	public Node deleteGreaterValuesOnRight(Node node) {
 		if (node == null || node.next == null) {
 			return node;
 		}
-
+//revrerse and check if next elment is greater then keep otherise delete.
 		Node reverse = this.reverse(node);
 		Node tmp = reverse;
 		int max = tmp.data;
 
 		while (tmp.next != null) {
-			if (tmp.next.data > max) {// if its greater then its okay
+			if (tmp.next.data > max) {// if the element is greater than the max element.
 				max = tmp.next.data;
 				tmp = tmp.next;
 			} else {
@@ -828,7 +842,8 @@ public class LinkedRecur {
 		return head;
 	}
 
-	// swapping the nodes of the linkedlist without swapping the data.
+	// swapping the nodes of given values of the linkedlist without swapping the data.
+	//here we will be taking four pointers.
 	public Node swapNodes(Node node, int a, int b) {
 		if (node == null || node.next == null) {
 			return node;
@@ -884,6 +899,8 @@ public class LinkedRecur {
 
 	// finding out the intersection point of the two unsorted list
 	// if the node lies in teh first half then issue.
+	//1->24->34->9->8->37->5
+	//12->99->8->37->5 
 	public int getIntersectionOfLists(Node node1, Node node2) {
 		if (node1 == null || node2 == null) {
 			return -1;
@@ -1049,8 +1066,12 @@ public class LinkedRecur {
 		oddEndNode.next = null;
 		return evenStartingNode;
 	}
+	
 
 	// splitting a single linkedlist alternatively.
+	//12->99->8->39->5->70->25
+	//12->8->5->25
+	//99->39->70
 	Node firstHead, secondHead;
 
 	public void alternateSplit(Node node) {
@@ -1087,6 +1108,9 @@ public class LinkedRecur {
 	}
 
 	// swapping the node links pairwise.
+	//12->99->8->39->5->70
+	//99->12->39->8->70->5
+	//this is like reversing the elements in the group of two elements.
 	public Node pairwiseSwapNodeLinks(Node node) {
 		if (node == null || node.next == null) {
 			return node;
@@ -1119,6 +1143,7 @@ public class LinkedRecur {
 	// merging two lists alternatively.
 	// 12->99->8->39
 	// 5->70
+	//12->5->99->70-.8->39
 	Node first, second;
 
 	public void mergeTwoListAlternatively(Node node1, Node node2) {
@@ -1188,6 +1213,7 @@ public class LinkedRecur {
 
 		return head;
 	}
+	
 	//add 1 to the linked list
 	//1->9->9->9->9
 	//2->0->0->->0
