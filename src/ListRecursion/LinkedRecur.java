@@ -1,6 +1,8 @@
 package ListRecursion;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 public class LinkedRecur {
@@ -170,9 +172,9 @@ public class LinkedRecur {
 	}
 
 	// rotating linked list by k nodes
-	//12->99->37->8->18
-	//18->12->99->37->8
-	//8->18->12->99->37
+	// 12->99->37->8->18
+	// 18->12->99->37->8
+	// 8->18->12->99->37
 	public Node rotateLinkedList(Node head, int k) {
 		if (head == null) {
 			return null;
@@ -264,8 +266,8 @@ public class LinkedRecur {
 		}
 
 		Node temp = reverse(node.next);// for node 99 the return will be 37.after 37 its null.
-		//node is 99 and node.next.next is 37.next
-		//second iteration 12.next is 99.next=12
+		// node is 99 and node.next.next is 37.next
+		// second iteration 12.next is 99.next=12
 		node.next.next = node;
 		node.next = null;
 
@@ -376,7 +378,8 @@ public class LinkedRecur {
 		return finalList.next;
 	}
 
-	// **getting the lowest common element from the intersection of two linked lists.
+	// **getting the lowest common element from the intersection of two linked
+	// lists.
 	// first sort both the lists then run the merging algorithm to get the common
 	// element.
 	public Node getLowestCommomElementOfTwoLinkedLists(Node a, Node b) {
@@ -432,7 +435,7 @@ public class LinkedRecur {
 
 		return node;
 	}
-	//to remove the dulicates from unsorted linked list we can first sort the list
+	// to remove the dulicates from unsorted linked list we can first sort the list
 
 	// deleting N nodes after M nodes from a linked list.
 	// first traverse n nodes then delete the m nodes.
@@ -514,9 +517,9 @@ public class LinkedRecur {
 	}
 
 	// getting the kth last element of the list through two pointers.
-	//8->18->17->28->6->null
-	//2nd from the last means 28.
-	//we can get size then size -k but this will need two traversals.
+	// 8->18->17->28->6->null
+	// 2nd from the last means 28.
+	// we can get size then size -k but this will need two traversals.
 	//
 	public int returnKthLastNode(Node node, int k) {
 		if (node == null) {
@@ -526,7 +529,7 @@ public class LinkedRecur {
 
 		Node ptr1, ptr2;
 		ptr1 = ptr2 = node;
-		//take two pointers and then traverse one of the pointer till k-1
+		// take two pointers and then traverse one of the pointer till k-1
 		for (int i = 1; i < k; i++) {
 			ptr2 = ptr2.next;
 			if (ptr2 == null) {
@@ -534,8 +537,8 @@ public class LinkedRecur {
 				return -1;
 			}
 		}
-        
-		//traverse both and when one of the pointers becomes null then both are done.
+
+		// traverse both and when one of the pointers becomes null then both are done.
 		while (ptr2.next != null) {
 			ptr1 = ptr1.next;
 			ptr2 = ptr2.next;
@@ -652,7 +655,7 @@ public class LinkedRecur {
 	// removing the middle node.If odd then remove the middle node.
 	// if even then there will be two middle.remove the second middle.
 	// we'll take two pointers and in every step save the previous node to slow.
-	//this two pointer strategy can be used to find the middle.
+	// this two pointer strategy can be used to find the middle.
 	public Node deleteMiddleNode(Node node) {
 		if (node == null || node.next == null) {
 			return null;
@@ -742,11 +745,12 @@ public class LinkedRecur {
 
 		return true;
 	}
+
 	// delete the nodes which have greater values on the right.
 	// taking two loops will not be an efficient solution O(n2).
 	// we'll revrese the linked list and then carry on
-    //12->99->8->39->5
-	//99->39->5
+	// 12->99->8->39->5
+	// 99->39->5
 	public Node deleteGreaterValuesOnRight(Node node) {
 		if (node == null || node.next == null) {
 			return node;
@@ -842,8 +846,9 @@ public class LinkedRecur {
 		return head;
 	}
 
-	// swapping the nodes of given values of the linkedlist without swapping the data.
-	//here we will be taking four pointers.
+	// swapping the nodes of given values of the linkedlist without swapping the
+	// data.
+	// here we will be taking four pointers.
 	public Node swapNodes(Node node, int a, int b) {
 		if (node == null || node.next == null) {
 			return node;
@@ -899,8 +904,8 @@ public class LinkedRecur {
 
 	// finding out the intersection point of the two unsorted list
 	// if the node lies in teh first half then issue.
-	//1->24->34->9->8->37->5
-	//12->99->8->37->5 
+	// 1->24->34->9->8->37->5
+	// 12->99->8->37->5
 	public int getIntersectionOfLists(Node node1, Node node2) {
 		if (node1 == null || node2 == null) {
 			return -1;
@@ -1066,12 +1071,11 @@ public class LinkedRecur {
 		oddEndNode.next = null;
 		return evenStartingNode;
 	}
-	
 
 	// splitting a single linkedlist alternatively.
-	//12->99->8->39->5->70->25
-	//12->8->5->25
-	//99->39->70
+	// 12->99->8->39->5->70->25
+	// 12->8->5->25
+	// 99->39->70
 	Node firstHead, secondHead;
 
 	public void alternateSplit(Node node) {
@@ -1108,9 +1112,9 @@ public class LinkedRecur {
 	}
 
 	// swapping the node links pairwise.
-	//12->99->8->39->5->70
-	//99->12->39->8->70->5
-	//this is like reversing the elements in the group of two elements.
+	// 12->99->8->39->5->70
+	// 99->12->39->8->70->5
+	// this is like reversing the elements in the group of two elements.
 	public Node pairwiseSwapNodeLinks(Node node) {
 		if (node == null || node.next == null) {
 			return node;
@@ -1143,7 +1147,7 @@ public class LinkedRecur {
 	// merging two lists alternatively.
 	// 12->99->8->39
 	// 5->70
-	//12->5->99->70-.8->39
+	// 12->5->99->70-.8->39
 	Node first, second;
 
 	public void mergeTwoListAlternatively(Node node1, Node node2) {
@@ -1213,32 +1217,500 @@ public class LinkedRecur {
 
 		return head;
 	}
-	
-	//add 1 to the linked list
-	//1->9->9->9->9
-	//2->0->0->->0
-	//9->9->9->9->->9
-	//1->0->0-0->0->0
-	public int addNumber(Node node,int i) {
-		if(node==null) {
+
+	// add 1 to the linked list
+	// 1->9->9->9->9
+	// 2->0->0->->0
+	// 9->9->9->9->->9
+	// 1->0->0-0->0->0
+	public int addNumber(Node node, int i) {
+		if (node == null) {
 			return i;
-		}else {
-			int j=node.data+addNumber(node.next,i);
-			node.data=j%10;
-			return j/10;
+		} else {
+			int j = node.data + addNumber(node.next, i);
+			node.data = j % 10;
+			return j / 10;
 		}
 	}
-	
-	public Node addOne(Node node,int i) {
-		int c=addNumber(node,i);
-		
+
+	public Node addOne(Node node, int i) {
+		int c = addNumber(node, i);
+
 		System.out.println(c);
-		if(c==1) {
-			Node newNode=createNewNode(c);
+		if (c == 1) {
+			Node newNode = createNewNode(c);
 			System.out.println(newNode.data);
-			newNode.next=node;
+			newNode.next = node;
 			return newNode;
 		}
 		return node;
 	}
+
+	// to check if the triplet exists in three linked lists.
+	// 13 is the triplet value
+	// 5->2->9
+	// 3->2->7
+	// 8->12->4
+	// sort the first list in ascending order and secod in descending order.
+	// 2->3->7
+	// 12->8->14
+	public boolean isTripletExistForSum(Node node1, Node node2, Node node3, int val) {
+
+		Node head2, head3;
+		head2 = node2;
+		head3 = node3;
+
+		while (node1 != null) {
+			while (node2 != null && node3 != null) {
+
+				int s = node1.data + node2.data + node3.data;
+
+				if (s == val) {
+					return true;
+				} else if (s > val) {
+					node3 = node3.next;
+				} else {
+					node2 = node2.next;
+				}
+			}
+
+			node1 = node1.next;
+			node2 = head2;
+			node3 = head3;
+		}
+
+		return false;
+	}
+
+	// add two numbers those are represented as linked lists.
+	// 1->7->8->2->5
+	// 5->6->7
+	// 1->8->3->9->2
+	// first we will revrese the linked lists and then add.
+	// if at the last we have a carry then we will need to create a new node.
+	// 1->7-8->2->5
+	// 9->7->5->6->7
+	// 1->1->5->3->9->2
+	public Node addTwoNumbers(Node node1, Node node2) {
+		node1 = this.reverse(node1);
+		node2 = this.reverse(node2);
+
+		Node newListHead = null;
+		Node prev = null;
+		int sum, c = 0;
+
+		while (node1 != null || node2 != null) {
+			sum = c + (node1 != null ? node1.data : 0) + (node2 != null ? node2.data : 0);
+
+			c = sum / 10;
+
+			Node node = createNewNode(sum % 10);
+			if (newListHead == null) {
+				newListHead = node;
+			} else {
+				prev.next = node;
+			}
+
+			prev = node;
+
+			if (node1 != null) {
+				node1 = node1.next;
+			}
+
+			if (node2 != null) {
+				node2 = node2.next;
+			}
+		}
+
+		if (c != 0) {
+			prev.next = createNewNode(c);
+		}
+
+		newListHead = this.reverse(newListHead);// at the end will again revrese the node.
+
+		return newListHead;
+	}
+
+	// adding two numbers recursively.
+	Node result, tempNode;
+	int carry;
+
+	public void addSumOfTwoLists(Node node1, Node node2) {
+
+		int count1 = 0, count2 = 0;
+		Node head1 = node1, head2 = node2;
+
+		while (node1 != null) {
+			count1++;
+			node1 = node1.next;
+		}
+
+		while (node2 != null) {
+			count2++;
+			node2 = node2.next;
+		}
+
+		if (count1 == count2) {
+			calSum(head1, head2);
+		} else {
+			if (count1 < count2) {// on the basis if the sizes we are changing the pointers.
+				Node tmp = head1;
+				head1 = head2;
+				head2 = tmp;
+			}
+
+			int d = Math.abs(count2 - count1);
+
+			node1 = head1;
+			node2 = head2;
+
+			while (d > 0) {
+				node1 = node1.next;
+				tempNode = node1;
+				d--;
+			}
+
+			this.calSum(node1, node2);
+
+			this.addRestSum(head1);
+		}
+
+		if (carry > 0) {
+			Node a = createNewNode(carry);
+			a.next = result;
+			result = a;
+		}
+	}
+
+	public void calSum(Node node1, Node node2) {
+		if (node1 == null) {
+			return;
+		}
+
+		calSum(node1.next, node2.next);
+		int s = node1.data + node2.data + carry;
+
+		carry = s / 10;
+		if (result == null) {
+			result = createNewNode(s % 10);
+		} else {
+			Node a = createNewNode(s % 10);
+			a.next = result;
+			result = a;
+		}
+
+	}
+
+	public void addRestSum(Node node) {
+		if (node == null) {
+			return;
+		}
+
+		if (node != tempNode) {
+			addRestSum(node.next);
+			int s = node.data + carry;
+			carry = s / 10;
+			Node a = createNewNode(s % 10);
+			a.next = result;
+			result = a;
+		}
+	}
+
+	// substracting two linkedlistst
+	// 1->7->8->2->5
+	// 5->6->7
+	// 1->7->2->5->8
+	// ---------
+	// 7->6->3->4
+	// 7->6->2->5
+	// 0->0->0->9
+	public Node substactTwoNumbers(Node node1, Node node2) {
+		Node head1 = node1;
+		Node head2 = node2;
+
+		int count1 = 0, count2 = 0;
+
+		while (node1 != null) {
+			node1 = node1.next;
+			count1++;
+		}
+
+		while (node2 != null) {
+			node2 = node2.next;
+			count2++;
+		}
+
+		node1 = head1;
+		node2 = head2;
+
+		if ((count1 < count2) || (count1 == count2 && node2 == getBiggerList(node1, node2))) {
+			Node t = node1;
+			node1 = node2;
+			node2 = t;
+		}
+
+		node1 = this.reverse(node1);
+		node2 = this.reverse(node2);
+
+		Node newListHead = null;
+		Node prev = null;
+		int diff;
+		boolean borrow = false;
+
+		while (node1 != null || node2 != null) {
+			if (borrow) {
+				node1.data = node1.data - 1;
+				borrow = false;
+			}
+
+			if (node1 != null && node2 != null && node1.data < node2.data) {
+				node1.data = node1.data + 10;
+				borrow = true;
+			}
+
+			diff = (node1 != null ? node1.data : 0) - (node2 != null ? node2.data : 0);
+
+			Node node = createNewNode(diff);
+			if (newListHead == null) {
+				newListHead = node;
+			} else {
+				prev.next = node;
+			}
+
+			prev = node;
+
+			if (node1 != null) {
+				node1 = node1.next;
+			}
+
+			if (node2 != null) {
+				node2 = node2.next;
+			}
+		}
+
+		newListHead = this.reverse(newListHead);
+
+		return newListHead;
+	}
+
+	/*
+	 * It gives the bigger node list
+	 */
+	public Node getBiggerList(Node node1, Node node2) {
+		Node head1 = node1;
+		Node head2 = node2;
+		while (node1 != null) {
+			if (node1.data > node2.data) {
+				return head1;
+			} else if (node1.data < node2.data) {
+				return head2;
+			}
+
+			node1 = node1.next;
+			node2 = node2.next;
+		}
+
+		return head1;
+	}
+
+	// counting the rotations in a sorted and rotated linked list.
+	// we'll check from which node the ascending order breaks and will maintain the
+	// count.
+	// 1->7->13->22->38
+	// 22->38->1->7->13
+	public int countRotationInSortedRotatedList(Node node) {
+		if (node == null || node.next == null) {
+			return 0;
+		}
+
+		int count = 0;
+		while (node.next != null) {
+			if (node.data < node.next.data) {
+				count++;
+			} else {
+				break;
+			}
+
+			node = node.next;
+		}
+
+		if (node.next == null) {
+			return 0;
+		} else {
+			return count + 1;
+		}
+
+	}
+
+	// merging K sorted linked Lists.
+	// 1->3->5->7
+	// 2->4->6->8
+	// 0->9->10->11
+	// 12->14->16->18
+	// 0->19->20->31
+	public Node mergeKSortedLists(Node[] arr, int last) {
+		while (last != 0) {
+			int i = 0;
+			int j = last;
+
+			while (i < j) {
+				arr[i] = mergeTwoSortedLinkedList(arr[i], arr[j]);
+
+				i++;
+				j--;
+
+				if (i >= j) {
+					last = j;
+					break;
+				}
+			}
+		}
+
+		return arr[0];
+	}
+
+	public Node mergeTwoSortedLinkedList(Node node1, Node node2) {
+		if (node1 == null && node2 == null) {
+			return null;
+		}
+
+		if (node1 == null || node2 == null) {
+			return node1 != null ? node1 : node2;
+		}
+
+		return merge(node1, node2);
+	}
+
+	// union of two linkedlist using the hashing
+	// 22->3->10->3->13
+	// 2->13->10->27->
+	// 22->3->10->13->2->27->36
+	public Node getUnionOfTwoLinkedList(Node node1, Node node2) {
+		if (node1 == null && node2 == null) {
+			return null;
+		}
+
+		if (node1 == null || node2 == null) {
+			return node1 != null ? node1 : node2;
+		}
+
+		Set<Integer> s = new HashSet<>();
+
+		Node temp = new Node();
+		Node result = temp;
+
+		while (node1 != null) {
+			if (!s.contains(node1.data)) {
+				temp.next = node1;
+				temp = temp.next;
+				s.add(node1.data);
+			}
+			node1 = node1.next;
+		}
+
+		while (node2 != null) {
+			if (!s.contains(node2.data)) {
+				temp.next = node2;
+				temp = temp.next;
+				s.add(node2.data);
+			}
+			node2 = node2.next;
+		}
+		temp.next = null;
+
+		return result.next;
+	}
+
+	// count pairs from two linked lists whose sum is equal to the given value.
+	// 22->3->10->13->23
+	// 2->14->10->27->21
+	// sorting one list in ascending order and the other in descending order to use
+	// two pointer.
+	public int getSumOfPairs(Node node1, Node node2, int sum) {
+		if (node1 == null || node2 == null) {
+			return 0;
+		}
+
+		HashSet<Integer> s = new HashSet<>();
+		int countPairs = 0;
+
+		while (node1 != null) {
+			s.add(node1.data);
+			node1 = node1.next;
+		}
+
+		while (node2 != null) {
+			if (s.contains(sum - node2.data)) {
+				countPairs++;
+			}
+
+			node2 = node2.next;
+		}
+
+		return countPairs;
+	}
+
+	// remove every kth node from the linked list
+	public Node removeEveryKthNode(Node node, int k) {
+		if (node == null || k <= 1) {
+			return null;
+		}
+
+		if (node.next == null && k > 1) {
+			System.out.println("Not a valid case");
+			return node;
+		}
+
+		Node head = node;
+		int i = 1;
+
+		while (node != null && node.next != null) {// everytime the node matches the count we will remove it.
+			if (i % (k - 1) == 0) {
+				node.next = node.next.next;
+			}
+
+			node = node.next;
+			i++;
+		}
+
+		return head;
+	}
+
+	// sort the linked list which is already sorted on the absolute value.
+	// 1->-3->10->-13->-23->16
+	// -23->-13->-3->1->10->16
+	// we can solve it in O(n) rather than O(nlogn) with merge sort
+	// traverse the linked list and whenever you find a negative value add it before
+	// the linked list.
+	public Node sortWhichIsSortedOnAbsoluteValue(Node head) {
+		if (head == null || head.next == null) {
+			return head;
+		}
+
+		Node node, next, prev;
+
+		node = next = head;
+		prev = null;
+
+		if (head.data < 0) {
+			prev = node;
+			node = node.next;
+		}
+
+		while (node != null) {
+			if (node.data < 0) {
+				prev.next = node.next;
+				next = node.next;
+				node.next = head;
+				head = node;
+				node = next;
+			} else {
+				prev = node;
+				node = node.next;
+			}
+		}
+
+		return head;
+	}
+//cloning a linkedlist with next and random pointer.
 }
